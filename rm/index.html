@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project RoadMap</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .project-block { display: none; }
+        .gallery img { max-width: 100px; margin: 5px; }
+        .task-list { list-style-type: none; padding-left: 0; }
+        .task-list li { padding-left: 20px; }
+        .task-list li::before { content: "-"; padding-right: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Project RoadMap</h1>
+        <div id="project-list"></div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        const projects = [
+            {
+                "title": "Project 1",
+                "photos": ["https://via.placeholder.com/150", "https://via.placeholder.com/150"],
+                "tasks": [
+                    { "task": "Task 1.1", "completed": false, "subtasks": [] },
+                    { "task": "Task 1.2", "completed": true, "subtasks": [
+                        { "task": "Subtask 1.2.1", "completed": false }
+                    ] }
+                ]
+            },
+            {
+                "title": "Project 2",
+                "photos": ["https://via.placeholder.com/150", "https://via.placeholder.com/150"],
+                "tasks": [
+                    { "task": "Task 2.1", "completed": true, "subtasks": [] },
+                    { "task": "Task 2.2", "completed": false, "subtasks": [
+                        { "task": "Subtask 2.2.1", "completed": true }
+                    ] }
+                ]
+            }
+        ];
+
+        function createTaskList(tasks) {
+            const ul = $('<ul class="task-list"></ul>');
+            tasks.forEach(task => {
+                const li = $('<li></li>');
+                const checkbox = $('<input type="checkbox">').prop('checked', task.completed);
+                li.append(checkbox).append(' ' + task.task);
+                if (task.subtasks.length > 0) {
+                    li.append(createTaskList(task.subtasks));
+                }
+                ul.append(li);
+            });
+            return ul;
+        }
+
+        function renderProjects() {
+            projects.forEach((project, index) => {
+                const projectHeader = $(`<div class="project-header">${project.title}</div>`).click(function() {
+                    $(this).next('.project-block').toggle();
+                });
+                const projectBlock = $('<div class="project-block"></div>');
+                
+                const gallery = $('<div class="gallery"></div>');
+                project.photos.forEach(photo => {
+                    gallery.append(`<img src="${photo}" alt="Project Photo">`);
+                });
+                
+                const tasks = createTaskList(project.tasks);
+                
+                projectBlock.append(gallery).append(tasks);
+                $('#project-list').append(projectHeader).append(projectBlock);
+            });
+        }
+
+        $(document).ready(function() {
+            renderProjects();
+        });
+    </script>
+</body>
+</html>
