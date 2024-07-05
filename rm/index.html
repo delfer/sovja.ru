@@ -50,7 +50,7 @@
                 const li = $('<li></li>');
                 const checkbox = $('<input type="checkbox">').prop('checked', task.completed);
                 li.append(checkbox).append(' ' + task.task);
-                if (task.subtasks.length > 0) {
+                if (task.subtasks && task.subtasks.length > 0) {
                     li.append(createTaskList(task.subtasks));
                 }
                 ul.append(li);
