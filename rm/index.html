@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
     <style>
+        .project-header {
+            font-size: 1.5rem;
+            background-color: #f8f9fa;
+            padding: 10px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
         .project-block { display: none; }
         .gallery img { max-width: 200px; margin: 5px; cursor: pointer; }
         .task-list { list-style-type: none; padding-left: 0; }
@@ -46,7 +53,8 @@
                 });
                 const projectBlock = $('<div class="project-block"></div>');
                 
-                const gallery = $('<div class="gallery"></div>');
+                const galleryId = `gallery-${index}`;
+                const gallery = $(`<div id="${galleryId}" class="gallery"></div>`);
                 project.photos.forEach(photo => {
                     gallery.append(`<a href="${photo}" class="popup-link"><img src="${photo}" alt="Project Photo"></a>`);
                 });
@@ -57,11 +65,14 @@
                 $('#project-list').append(projectHeader).append(projectBlock);
             });
 
-            $('.popup-link').magnificPopup({
-                type: 'image',
-                gallery: {
-                    enabled: true
-                }
+            $('.gallery').each(function() {
+                $(this).magnificPopup({
+                    delegate: 'a',
+                    type: 'image',
+                    gallery: {
+                        enabled: true
+                    }
+                });
             });
         }
 
