@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project RoadMap</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
     <style>
         .project-block { display: none; }
-        .gallery img { max-width: 100px; margin: 5px; }
+        .gallery img { max-width: 200px; margin: 5px; cursor: pointer; }
         .task-list { list-style-type: none; padding-left: 0; }
         .task-list li { padding-left: 20px; }
         .task-list li::before { content: "-"; padding-right: 5px; }
@@ -20,6 +21,7 @@
     </div>
     
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
     <script>
         const projects = [
             {
@@ -101,13 +103,20 @@
                 
                 const gallery = $('<div class="gallery"></div>');
                 project.photos.forEach(photo => {
-                    gallery.append(`<img src="${photo}" alt="Project Photo">`);
+                    gallery.append(`<a href="${photo}" class="popup-link"><img src="${photo}" alt="Project Photo"></a>`);
                 });
                 
                 const tasks = createTaskList(project.tasks);
                 
                 projectBlock.append(gallery).append(tasks);
                 $('#project-list').append(projectHeader).append(projectBlock);
+            });
+
+            $('.popup-link').magnificPopup({
+                type: 'image',
+                gallery: {
+                    enabled: true
+                }
             });
         }
 
