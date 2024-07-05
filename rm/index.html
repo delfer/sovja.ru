@@ -9,9 +9,8 @@
     <style>
         .project-block { display: none; }
         .gallery img { max-width: 200px; margin: 5px; cursor: pointer; }
-        .task-list { list-style-type: none; padding-left: 0; }
+        .task-list { list-style-type: decimal; padding-left: 20px; }
         .task-list li { padding-left: 20px; }
-        .task-list li::before { content: "-"; padding-right: 5px; }
     </style>
 </head>
 <body>
@@ -31,7 +30,7 @@
                     { "task": "Разработка", "completed": true, "subtasks": [] },
                     { "task": "Выпуск первой партии", "completed": true, "subtasks": [] },
                     { "task": "Продажа", "completed": false, "subtasks": [
-                        { "task": "Публикация на Авито", "completed": true }
+                        { "task": "Публикация на Авито", "completed": true },
                         { "task": "Регистрация ЮЛ", "completed": false },
                          { "task": "Публикация на OZON", "completed": false },
                           { "task": "Публикация на Wildberries", "completed": false },
@@ -81,10 +80,10 @@
         ];
 
         function createTaskList(tasks) {
-            const ul = $('<ul class="task-list"></ul>');
+            const ul = $('<ol class="task-list"></ol>');
             tasks.forEach(task => {
                 const li = $('<li></li>');
-                const checkbox = $('<input type="checkbox">').prop('checked', task.completed);
+                const checkbox = $('<input type="checkbox" disabled>').prop('checked', task.completed);
                 li.append(checkbox).append(' ' + task.task);
                 if (task.subtasks && task.subtasks.length > 0) {
                     li.append(createTaskList(task.subtasks));
@@ -112,7 +111,8 @@
                 $('#project-list').append(projectHeader).append(projectBlock);
             });
 
-            $('.popup-link').magnificPopup({
+            $('.gallery').magnificPopup({
+                delegate: 'a', // child items selector, by clicking on it popup will open
                 type: 'image',
                 gallery: {
                     enabled: true
