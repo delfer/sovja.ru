@@ -41,7 +41,7 @@
                 "tasks": [
                     { "task": "Разработка схемы", "completed": false, "subtasks": [] },
                     { "task": "Разработка ПП", "completed": false, "subtasks": [] },
-                    { "task": "Производство плат", "completed": false, "subtasks": [] }
+                    { "task": "Производство плат", "completed": false, "subtasks": [] } ]
             },
             {
                 "title": "Drone combat",
