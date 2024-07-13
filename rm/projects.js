@@ -47,10 +47,11 @@
                 "title": "Drone combat",
                 "photos": ["https://via.placeholder.com/150", "https://via.placeholder.com/150"],
                 "tasks": [
-                    { "task": "Task 2.1", "completed": true, "subtasks": [] },
-                    { "task": "Task 2.2", "completed": false, "subtasks": [
-                        { "task": "Subtask 2.2.1", "completed": true }
-                    ] }
+                    { "task": "Сайт", "completed": false, "subtasks": [] },
+                    { "task": "Личный кабинет", "completed": false, "subtasks": [] },
+                    { "task": "Прототип модуля", "completed": false, "subtasks": [] },
+                    { "task": "Прошивка", "completed": false, "subtasks": [] },
+                    { "task": "Модуль королевской битвы", "completed": false, "subtasks": [] }
                 ]
             }
         ];
